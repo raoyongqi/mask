@@ -1,9 +1,9 @@
 // mapMask.js
-export const mapMask = (AMap, map) => {
+export const mapMask = (AMap, map,selectedCity) => {
   new AMap.DistrictSearch({
     extensions: "all",
     subdistrict: 0,
-  }).search("130000", function (status, result) {
+  }).search(selectedCity.name, function (status, result) {
     if (status === 'complete' && result.districtList.length > 0) {
       const outer = [
         new AMap.LngLat(-360, 90, true),

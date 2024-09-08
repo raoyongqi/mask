@@ -1,8 +1,7 @@
 // mapUtils.js
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { mapMask } from './mapMask'; // 引入 mapMask 函数
-
-export const initMap = (container, satelliteLayerVisible) => {
+export const initMap = (container, satelliteLayerVisible,selectedCity) => {
   window._AMapSecurityConfig = {
     securityJsCode: "16f81296c450f8bb5149a86056dae9c8",
   };
@@ -35,7 +34,7 @@ export const initMap = (container, satelliteLayerVisible) => {
       zooms: [5, 18],
       resizeEnable: true,
       showLabel: true,
-      center: [116.40, 39.90],
+      center: selectedCity.center,
     });
 
     if (satelliteLayerVisible) {
@@ -43,7 +42,7 @@ export const initMap = (container, satelliteLayerVisible) => {
       map.add(satelliteLayer); // 添加卫星图层
     }
 
-    if (map && AMap) { mapMask(AMap, map); } // 调用 mapMask
+    if (map && AMap) { mapMask(AMap, map,selectedCity); } // 调用 mapMask
   })
   .catch(e => {
     console.trace(e);
