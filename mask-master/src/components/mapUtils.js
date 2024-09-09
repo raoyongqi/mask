@@ -42,7 +42,32 @@ export const initMap = (container, satelliteLayerVisible,selectedCity) => {
       map.add(satelliteLayer); // 添加卫星图层
     }
 
-    if (map && AMap) { mapMask(AMap, map,selectedCity); } // 调用 mapMask
+    if (map && AMap) { 
+      mapMask(AMap, map,selectedCity);
+      const citys = [
+        { lnglat: [116.258446, 37.686622], name: '景县', style: 2 },
+        { lnglat: [113.559954, 22.124049], name: '圣方济各堂区', style: 2 },
+        // 添加更多数据
+      ];
+
+      // 自定义图标样式
+      const style = {
+        url: './logo192.png',
+        size: new AMap.Size(30, 30),
+        anchor: new AMap.Pixel(15, 15),
+      };
+
+      // 创建海量点图层
+      const massMarks = new AMap.MassMarks(citys, {
+        opacity: 0.8,
+        zIndex: 111,
+        cursor: 'pointer',
+        style: style,
+      });
+
+      // 将海量点图层添加到地图
+      massMarks.setMap(map);
+     } // 调用 mapMask
   })
   .catch(e => {
     console.trace(e);
