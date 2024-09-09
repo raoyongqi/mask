@@ -2,3 +2,5 @@
 
 # dependencies
 /mask-master/node_modules
+/data
+/venv
