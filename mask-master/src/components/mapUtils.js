@@ -44,25 +44,37 @@ export const initMap = (container, satelliteLayerVisible,selectedCity) => {
 
     if (map && AMap) { 
       mapMask(AMap, map,selectedCity);
-      const citys = [
-        { lnglat: [116.258446, 37.686622], name: '景县', style: 2 },
-        { lnglat: [113.559954, 22.124049], name: '圣方济各堂区', style: 2 },
-        // 添加更多数据
+      const styles = [
+        {
+          url: './logo192.png',
+          size: new AMap.Size(30, 30),
+          anchor: new AMap.Pixel(15, 15),
+        },
+        {
+          url: './logo.png',
+          size: new AMap.Size(20, 20),
+          anchor: new AMap.Pixel(10, 10),
+        },
+        {
+          url: './logo.png',
+          size: new AMap.Size(40, 40),
+          anchor: new AMap.Pixel(20, 20),
+        }
       ];
-
-      // 自定义图标样式
-      const style = {
-        url: './logo192.png',
-        size: new AMap.Size(30, 30),
-        anchor: new AMap.Pixel(15, 15),
-      };
-
+      
+      // 城市数据，每个城市指定样式的索引
+      const citys = [
+        { lnglat: [116.397428, 39.90923], style: 0 }, // 使用第一个样式
+        { lnglat: [117.200983, 39.084158], style: 1 }, // 使用第二个样式
+        { lnglat: [121.473701, 31.230416], style: 2 }  // 使用第三个样式
+      ];
+      
       // 创建海量点图层
       const massMarks = new AMap.MassMarks(citys, {
         opacity: 0.8,
         zIndex: 111,
         cursor: 'pointer',
-        style: style,
+        style: styles, // 传入样式数组
       });
 
       // 将海量点图层添加到地图
